@@ -1,0 +1,17 @@
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T16:21:57.944Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T16:21:57.952Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T16:22:35.538Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T16:22:35.546Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2024-12-17T16:22:45.583Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T16:22:50.912Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T16:22:50.921Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2024-12-17T16:32:48.221Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T16:38:21.821Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T16:38:21.829Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T16:51:17.000Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T16:51:17.009Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2024-12-17T16:51:31.820Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T16:51:50.110Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T16:51:50.119Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T16:52:26.914Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T16:52:26.923Z"}

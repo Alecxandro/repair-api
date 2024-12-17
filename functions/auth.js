@@ -6,10 +6,10 @@ const ALLOWED_ORIGINS = [
   'http://localhost:3000',
   'http://localhost:5173',
   process.env.FRONTEND_URL,
-  'https://your-site-name.netlify.app' // Add your Netlify domain
+  'https://repair-api2.netlify.app' // Add your Netlify domain
 ].filter(Boolean);
 
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   // Connect to database
   await connectDB();
 

@@ -2,7 +2,7 @@ import { connectDB } from '../config/database.js';
 import { getStats } from '../controllers/stats.controller.js';
 import { protect } from '../middleware/auth.middleware.js';
 
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   await connectDB();
 
   const path = event.path.replace('/.netlify/functions/stats', '');

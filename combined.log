@@ -63,3 +63,5 @@
 {"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T17:52:01.353Z"}
 {"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T17:52:10.318Z"}
 {"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T17:52:10.330Z"}
+{"level":"info","message":"Database connected successfully","timestamp":"2024-12-17T17:56:28.674Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2024-12-17T17:56:28.684Z"}

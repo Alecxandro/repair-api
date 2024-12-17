@@ -18,19 +18,32 @@ const connectDB = async () => {
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`Error: ${error.message}`);
-    process.exit(1);
+    throw new Error('Database connection failed');
   }
 };
 
 export const handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  // Connect to database
-  await connectDB();
-
-  const path = event.path.replace('/.netlify/functions/auth', '');
-  const method = event.httpMethod;
-
+  
   try {
+    await connectDB();
+
+    const path = event.path.replace('/.netlify/functions/auth', '');
+    const method = event.httpMethod;
+
+    // Handle CORS preflight
+    if (method === 'OPTIONS') {
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': process.env.FRONTEND_URL || '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Allow-Credentials': true
+        }
+      };
+    }
+
     let result;
     
     switch (true) {
@@ -58,17 +71,24 @@ export const handler = async (event, context) => {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': ALLOWED_ORIGINS[0],
-        'Access-Control-Allow-Credentials': true,
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+        'Access-Control-Allow-Origin': process.env.FRONTEND_URL || '*',
+        'Access-Control-Allow-Credentials': true
       },
       body: JSON.stringify(result)
     };
+
   } catch (error) {
+    console.error('Function error:', error);
     return {
       statusCode: error.statusCode || 500,
-      body: JSON.stringify({ message: error.message })
+      headers: {
+        'Access-Control-Allow-Origin': process.env.FRONTEND_URL || '*',
+        'Access-Control-Allow-Credentials': true
+      },
+      body: JSON.stringify({ 
+        message: error.message || 'Internal server error',
+        error: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      })
     };
   }
 }; 

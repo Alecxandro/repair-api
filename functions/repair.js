@@ -1,4 +1,4 @@
-import { connectDB } from '../config/database.js';
+import mongoose from 'mongoose';
 import {
   createRepair,
   getRepairs,
@@ -9,7 +9,21 @@ import {
 } from '../controllers/repair.controller.js';
 import { protect } from '../middleware/auth.middleware.js';
 
-export const handler = async (event, context) => {
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+exports.handler = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
   await connectDB();
 
   const path = event.path.replace('/.netlify/functions/repair', '');

@@ -1,22 +1,14 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import nodeExternals from 'webpack-node-externals';
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default {
+module.exports = {
   target: 'node',
   mode: 'production',
   entry: './server.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'server.js',
-    module: true,
-    libraryTarget: 'module',
-  },
-  experiments: {
-    outputModule: true,
+    clean: true
   },
   externals: [nodeExternals()],
   module: {
@@ -30,7 +22,7 @@ export default {
             presets: [
               ['@babel/preset-env', { 
                 targets: { node: 'current' },
-                modules: 'auto' 
+                modules: 'commonjs'
               }]
             ],
             plugins: ['@babel/plugin-transform-runtime']
@@ -43,6 +35,6 @@ export default {
     extensions: ['.js'],
   },
   optimization: {
-    minimize: true
+    minimize: false
   }
 };

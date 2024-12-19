@@ -30,13 +30,17 @@ const logger = winston.createLogger({
     new winston.transports.Console({
       format: winston.format.simple(),
     }),
-    new winston.transports.File({
-      filename: 'error.log',
-      level: 'error',
-    }),
-    new winston.transports.File({
-      filename: 'combined.log',
-    }),
+    ...(process.env.NODE_ENV !== 'production' 
+      ? [
+          new winston.transports.File({
+            filename: 'error.log',
+            level: 'error',
+          }),
+          new winston.transports.File({
+            filename: 'combined.log',
+          }),
+        ] 
+      : []),
   ],
 })
 
@@ -46,7 +50,12 @@ const createApp = () => {
   app.use(helmet())
   app.disable('x-powered-by')
 
-  const ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:5173', process.env.FRONTEND_URL].filter(Boolean)
+  const ALLOWED_ORIGINS = [
+    'http://localhost:3000', 
+    'http://localhost:5173', 
+    process.env.FRONTEND_URL,
+    process.env.RENDER_EXTERNAL_URL  // Add this line
+  ].filter(Boolean)
 
   app.use(
     cors({
